@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HSI Berbagi - Program Donasi Ramadhan</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .progress-bar-fill {
+        width: 0%;
+      }
+      .modal-content iframe {
+        aspect-ratio: 16 / 9;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container">
+        <a href="#hero" class="logo-link">
+          <img src="/image/logo-HSIB.png" alt="" class="logo" />
+          HSI Berbagi
+        </a>
+        <nav class="nav-menu" id="navMenu">
+          <a href="#hero">Beranda</a>
+          <a href="#program">Program</a>
+          <a href="#keutamaan">Keutamaan</a>
+          <a href="#donasi">Donasi</a>
+          <a href="#galeri">Galeri</a>
+          <a href="#faq">FAQ</a>
+          <a href="#" class="btn-primary btn-donasi-nav">Donasi Sekarang</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </header>
+
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+          <h1>Sambut Ramadhan Penuh Berkah, Raih Pahala Berlimpah</h1>
+          <p>
+            Bersama HSI Berbagi, salurkan donasi terbaik Anda untuk yatim,
+            dhuafa, dan santri penghafal Al-Qur'an.
+          </p>
+          <a
+            href="#donasi"
+            class="btn-primary btn-large"
+            data-aos="zoom-in"
+            data-aos-delay="500"
+          >
+            SAYA MAU BERBAGI
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="program-section section-padding bg-light">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">
+          Program Unggulan Ramadhan
+        </h2>
+        <div class="program-grid">
+          <div class="program-card" data-aos="fade-up">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>Bingkisan Lebaran Yatim & Dhuafa</h3>
+            <p>
+              Paket kebutuhan pokok untuk menyambut hari raya Idul Fitri bagi
+              mereka yang membutuhkan.
+            </p>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-utensils"></i>
+            <h3>Ifthar Jama'i & Sahur</h3>
+            <p>
+              Menyediakan hidangan berbuka puasa dan sahur untuk santri dan
+              masyarakat di daerah terpencil.
+            </p>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="400">
+            <i class="fas fa-quran"></i>
+            <h3>Waqaf Al-Qur'an</h3>
+            <p>
+              Penyaluran mushaf Al-Qur'an baru kepada pesantren, masjid, dan TPA
+              yang kekurangan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="keutamaan" class="keutamaan-section section-padding">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">
+          Keutamaan Berbagi di Bulan Ramadhan
+        </h2>
+        <div class="keutamaan-content">
+          <blockquote class="quote" data-aos="zoom-in">
+            "Sedekah yang paling utama adalah sedekah pada bulan Ramadhan."
+          </blockquote>
+          <ul class="list-disc list-inside space-y-3 mt-10 text-left">
+            <li data-aos="fade-right" data-aos-delay="100">
+              Pahala dilipatgandakan hingga 700 kali lipat, bahkan lebih.
+            </li>
+            <li data-aos="fade-right" data-aos-delay="200">
+              Meneladani Rasulullah ﷺ yang sangat dermawan di bulan Ramadhan.
+            </li>
+            <li data-aos="fade-right" data-aos-delay="300">
+              Sarana meraih malam Lailatul Qadar melalui amalan kebaikan yang
+              berkelanjutan.
+            </li>
+            <li data-aos="fade-right" data-aos-delay="400">
+              Meraih pahala memberi makan orang yang berpuasa.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="donasi" class="donasi-section section-padding bg-light">
+      <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-down">
+          Target Donasi Program Ramadhan
+        </h2>
+        <p data-aos="fade-up">
+          Mari capai target kebaikan bersama. Setiap kontribusi sangat berarti!
+        </p>
+
+        <div
+          class="progress-container"
+          data-aos="zoom-in"
+          data-aos-delay="300"
+          data-terkumpul="75000000"
+          data-target="100000000"
+        >
+          <div class="progress-bar-label">
+            <span class="label-text" id="terkumpul-label"
+              >Terkumpul: <strong>Rp 75.000.000</strong></span
+            >
+            <span class="label-percentage" id="persen-label">75%</span>
+          </div>
+          <div class="progress-bar-base">
+            <div
+              class="progress-bar-fill"
+              id="progress-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+          <div class="progress-target">
+            Target: <strong id="target-label">Rp 100.000.000</strong>
+          </div>
+        </div>
+        <div class="btn-progress">
+          <a
+            href="#"
+            class="btn-primary btn-large"
+            data-aos="zoom-in"
+            data-aos-delay="600"
+            >BERBAGI SEKARANG</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="penerima" class="penerima-section section-padding">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">
+          Senyum Mereka, Kebahagiaan Kita
+        </h2>
+        <p class="description text-center" data-aos="fade-up">
+          Testimoni dan kisah inspiratif dari penerima manfaat program HSI
+          Berbagi.
+        </p>
+
+        <div
+          class="testimonial-carousel"
+          id="testimonial-carousel"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <div class="testimonial-item active">
+            <p>
+              "Alhamdulillah, bingkisan lebaran ini sangat membantu anak-anak
+              kami. Terima kasih HSI Berbagi!"
+            </p>
+            <cite>- Ibu Aminah, Penerima Manfaat Yatim (Jawa Barat)</cite>
+          </div>
+          <div class="testimonial-item">
+            <p>
+              "Paket ifthar ini meringankan beban kami di bulan puasa. Semoga
+              Allah membalas kebaikan para donatur."
+            </p>
+            <cite>- Bapak Rahmat, Dhuafa (Banten)</cite>
+          </div>
+          <div class="testimonial-item">
+            <p>
+              "MasyaAllah, penyaluran Qur'an ini sangat kami tunggu. Kini santri
+              bisa belajar dengan mushaf yang layak."
+            </p>
+            <cite>- Ustadz Harun, Pengurus Pesantren (Pelosok Sulawesi)</cite>
+          </div>
+          <div class="testimonial-item">
+            <p>
+              "Setiap kali kami berbuka, kami selalu mendoakan para muhsinin HSI
+              Berbagi. Jazakumullahu khairan!"
+            </p>
+            <cite>- Komunitas Mualaf (Yogyakarta)</cite>
+          </div>
+        </div>
+
+        <div class="carousel-nav" data-aos="fade-up" data-aos-delay="500">
+          <button class="prev-btn" aria-label="Previous Testimonial">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="next-btn" aria-label="Next Testimonial">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeri" class="galeri-section section-padding bg-light">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">
+          Dokumentasi Kebaikan (Galeri Foto)
+        </h2>
+        <div class="gallery-container">
+          <div class="gallery-grid-photo">
+            <div
+              class="gallery-item"
+              style="background-image: url('img/galeri-1.jpg')"
+              onclick="openModal('img/galeri-1.jpg', 'image')"
+              data-aos="zoom-in"
+            >
+              <div class="overlay">
+                <i class="fas fa-image"></i>
+                <p>Pembagian Sembako di Panti Asuhan</p>
+                <span>Lihat Foto</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item"
+              style="background-image: url('img/galeri-2.jpg')"
+              onclick="openModal('img/galeri-2.jpg', 'image')"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="overlay">
+                <i class="fas fa-image"></i>
+                <p>Buka Bersama Anak Yatim</p>
+                <span>Lihat Foto</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item"
+              style="background-image: url('img/galeri-3.jpg')"
+              onclick="openModal('img/galeri-3.jpg', 'image')"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <div class="overlay">
+                <i class="fas fa-image"></i>
+                <p>Kegiatan Bersih-Bersih Lingkungan</p>
+                <span>Lihat Foto</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item"
+              style="background-image: url('img/galeri-4.jpg')"
+              onclick="openModal('img/galeri-4.jpg', 'image')"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
+              <div class="overlay">
+                <i class="fas fa-image"></i>
+                <p>Donasi Alat Sekolah untuk Pelosok</p>
+                <span>Lihat Foto</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item"
+              style="background-image: url('img/galeri-5.jpg')"
+              onclick="openModal('img/galeri-5.jpg', 'image')"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
+              <div class="overlay">
+                <i class="fas fa-image"></i>
+                <p>Kunjungan ke Panti Jompo</p>
+                <span>Lihat Foto</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item"
+              style="background-image: url('img/galeri-6.jpg')"
+              onclick="openModal('img/galeri-6.jpg', 'image')"
+              data-aos="zoom-in"
+              data-aos-delay="500"
+            >
+              <div class="overlay">
+                <i class="fas fa-image"></i>
+                <p>Penyaluran Bantuan Bencana Alam</p>
+                <span>Lihat Foto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title" data-aos="fade-down">
+          Dokumentasi Kebaikan (Video)
+        </h2>
+        <div class="gallery-container">
+          <div class="gallery-grid-video">
+            <div
+              class="gallery-item video-item"
+              onclick="openModal('https://www.youtube.com/embed/VIDEO_ID_A', 'video')"
+              data-aos="zoom-in"
+            >
+              <img
+                src="img/video-thumb-A.jpg"
+                alt="Thumbnail Video Dokumentasi A"
+              />
+              <div class="overlay">
+                <i class="fas fa-play-circle"></i>
+                <p>Video Dokumentasi Kegiatan A</p>
+                <span>Tonton Video</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item video-item"
+              onclick="openModal('https://www.youtube.com/embed/VIDEO_ID_B', 'video')"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <img
+                src="img/video-thumb-B.jpg"
+                alt="Thumbnail Video Dokumentasi B"
+              />
+              <div class="overlay">
+                <i class="fas fa-play-circle"></i>
+                <p>Video Dokumentasi Kegiatan B</p>
+                <span>Tonton Video</span>
+              </div>
+            </div>
+            <div
+              class="gallery-item video-item"
+              onclick="openModal('https://www.youtube.com/embed/VIDEO_ID_C', 'video')"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <img
+                src="img/video-thumb-C.jpg"
+                alt="Thumbnail Video Dokumentasi C"
+              />
+              <div class="overlay">
+                <i class="fas fa-play-circle"></i>
+                <p>Video Dokumentasi Kegiatan C</p>
+                <span>Tonton Video</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="galleryModal" class="modal">
+      <span class="close-btn">&times;</span>
+      <div class="modal-content"></div>
+    </div>
+
+    <section id="faq" class="faq-section section-padding">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">
+          Pertanyaan yang Sering Diajukan (FAQ)
+        </h2>
+        <div class="faq-list">
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+            <button class="faq-question">
+              Bagaimana cara memastikan donasi saya sampai ke penerima manfaat?
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                HSI Berbagi memiliki mekanisme penyaluran yang transparan dan
+                akuntabel, didukung oleh tim relawan di berbagai wilayah.
+                Dokumentasi penyaluran akan diunggah di galeri kami.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+            <button class="faq-question">
+              Apakah HSI Berbagi legal? <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Ya, HSI Berbagi beroperasi secara sah berdasarkan hukum di
+                Indonesia di bawah Yayasan Halaqah Silsilah Ilmiyyah (HSI)
+                AbdullahRoy.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+            <button class="faq-question">
+              Berapa minimal donasi? <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Tidak ada batasan minimal donasi. Berapapun jumlahnya,
+                insyaAllah akan menjadi kebaikan yang diterima di sisi Allah ﷻ.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <button id="backToTopBtn" title="Kembali ke Atas" class="back-to-top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-contact">
+            <h4>Kontak Kami</h4>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Kantor Pusat HSI Berbagi
+            </p>
+            <p><i class="fas fa-phone"></i> +62 812-3456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@hsiberbagi.com</p>
+          </div>
+
+          <div class="footer-links">
+            <h4>Tautan Cepat</h4>
+            <ul>
+              <li><a href="#program">Program</a></li>
+              <li><a href="#donasi">Cara Donasi</a></li>
+              <li><a href="#galeri">Dokumentasi</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-social">
+            <h4>Ikuti Kami</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 HSI Berbagi. Dikelola oleh Yayasan Halaqah Silsilah
+          Ilmiyyah AbdullahRoy.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
