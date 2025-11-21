@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- UTILITY FUNCTION ---
     /**
-     * Mengubah angka menjadi format Rupiah (Fix bug saat input berupa number)
+     * Mengubah angka menjadi format Rupiah.
      */
     function formatRupiah(angka, prefix) {
         // Gunakan Intl.NumberFormat yang lebih modern dan akurat
@@ -65,12 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!fillElement) return;
 
-        // Update teks label menggunakan formatRupiah yang sudah diperbaiki
+        // Update teks label menggunakan formatRupiah
         if (terkumpulLabel) {
             terkumpulLabel.innerHTML = `Terkumpul: <strong>${formatRupiah(terkumpul)}</strong>`;
         }
         if (targetLabel) {
-            // Target label sudah ditampilkan di luar progress bar di HTML, tidak perlu prefix
             targetLabel.innerHTML = `${formatRupiah(target)}`;
         }
         if (persenLabel) {
@@ -130,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================
-    // --- 4. CAROUSEL FOTO (SECTION 7/Galeri) --- (DILENGKAPI KEMBALI)
+    // --- 4. CAROUSEL FOTO (SECTION GALERI) ---
     // =========================================================
     const photoTrack = document.getElementById('photoCarouselTrack');
     const photoNextButton = document.getElementById('nextPhotoBtn');
@@ -199,33 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 5. DROP-DOWN FAQ (ACCORDION) ---
-    const faqQuestions = document.querySelectorAll('.faq-question');
+    // MODIFIKASI: Bagian ini dihapus total karena Section FAQ telah dihapus dari HTML
+    // const faqQuestions = document.querySelectorAll('.faq-question');
+    // ... (Logika FAQ dihapus) ...
 
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            const isActive = question.classList.contains('active');
-
-            // Tutup semua jawaban yang sedang terbuka (Single-open accordion)
-            faqQuestions.forEach(q => {
-                const a = q.nextElementSibling;
-                if (q.classList.contains('active')) {
-                    q.classList.remove('active');
-                    // Atur maxHeight ke null dan padding ke 0 untuk transisi keluar
-                    a.style.maxHeight = null; 
-                    a.style.padding = '0 20px';
-                }
-            });
-
-            // Buka/Tutup jawaban yang diklik
-            if (!isActive) {
-                question.classList.add('active');
-                // Atur maxHeight ke scrollHeight konten + padding bawah
-                answer.style.maxHeight = answer.scrollHeight + 30 + "px"; 
-                answer.style.padding = '0 20px 15px 20px'; 
-            }
-        });
-    });
 
     // --- 6. TOMBOL KEMBALI KE ATAS (BACK TO TOP) ---
     const backToTopBtn = document.getElementById('backToTopBtn');
@@ -254,8 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // =========================================================
 // --- 7. MODAL GALERI (GLOBAL FUNCTION) ---
-// Perlu berada di luar DOMContentLoaded agar dapat diakses oleh event 'onclick' di HTML
 // =========================================================
+// MODIFIKASI: Fungsi ini tetap dipertahankan karena bagian galeri foto masih ada.
 
 const modal = document.getElementById("galleryModal");
 const closeButton = document.getElementsByClassName("close-btn")[0];
