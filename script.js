@@ -1,348 +1,243 @@
-<!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HSI Berbagi - Ramadhan Terbaik</title>
+document.addEventListener('DOMContentLoaded', () => {
+    // Pastikan AOS tersedia sebelum diinisialisasi
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            once: true,
+            duration: 1000,
+            easing: 'ease-in-out',
+        });
+    }
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      rel="stylesheet"
-    />
+    // --- UTILITY FUNCTION ---
+    function formatRupiah(angka, prefix) {
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(angka);
+    }
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    // --- 1. NAVIGASI (Navbar Toggle) ---
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
 
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
 
-    <link rel="stylesheet" href="style.css" />
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) { 
+                    navMenu.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    }
 
-    <style>
-      .progress-bar-fill {
-        width: 0%;
-      }
-      /* Menghapus style modal iframe karena tidak ada video lagi */
-    </style>
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="container">
-        <a href="#hero" class="logo-link">
-          <img src="/image/logo-HSIB.png" alt="Logo HSI Berbagi" class="logo" />
-          HSI Berbagi
-        </a>
-        <nav class="nav-menu" id="navMenu">
-          <a href="#hero">Beranda</a>
-          <a href="#program">Program</a>
-          <a href="#keutamaan">Keutamaan</a>
-          <a href="#donasi">Donasi</a>
-          <a href="#galeri">Galeri</a>
-          <a href="#donasi" class="btn-primary btn-donasi-nav">Yuk Berbagi</a>
-        </nav>
-        <div class="menu-toggle" id="menuToggle">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
-    </header>
+    // --- 2. PROGRESS BAR DYNAMIC & ANIMATION ---
+    const progressContainer = document.querySelector('.progress-container');
 
-    <section id="hero" class="hero-section">
-      <div class="container">
-        <div class="hero-content" data-aos="fade-up">
-          <h1>Sambut Ramadhan Penuh Berkah, Jadikan Ramadhan Ini</h1>
-          <h1>
-            <span style="color: #d67d3e">Ramadhan</span>
-            <span style="color: #d67d3e">Terbaik</span>
-          </h1>
-          <p>
-            Bersama HSI Berbagi, Jadikan Bulan Ramadhan Lebih Bermakna dengan
-            Berbagi
-          </p>
-          <a
-            href="#donasi"
-            class="btn-primary btn-large"
-            data-aos="zoom-in"
-            data-aos-delay="500"
-          >
-            YUK BERBAGI
-          </a>
-        </div>
-      </div>
-    </section>
+    function updateProgressBar() {
+        if (!progressContainer) return;
 
-    <section id="program" class="program-section section-padding bg-light">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-down">
-          Program Ramadhan Siap Temani Langkah Kebaikanmu di Bulan Mulia
-        </h2>
-        <div class="program-grid program-grid-6">
-          <div class="program-card" data-aos="fade-up">
-            <i class="fas fa-coins"></i>
-            <h3>Fidyah</h3>
-            <p>
-              Tunaikan kewajiban Fidyah Anda untuk mengganti puasa Ramadhan yang
-              tertinggal.
-            </p>
-          </div>
-          <div class="program-card" data-aos="fade-up" data-aos-delay="100">
-            <i class="fas fa-box-open"></i>
-            <h3>Berbagi Ifthor Ramadhan (BIRR)</h3>
-            <p>
-              Donasi hidangan berbuka puasa untuk santri, dhuafa, dan mualaf di
-              berbagai wilayah.
-            </p>
-          </div>
-          <div class="program-card" data-aos="fade-up" data-aos-delay="200">
-            <i class="fas fa-mosque"></i>
-            <h3>I'tikaf</h3>
-            <p>
-              Dukung fasilitas dan logistik kegiatan I'tikaf 10 hari terakhir
-              Ramadhan.
-            </p>
-          </div>
-          <div class="program-card" data-aos="fade-up" data-aos-delay="300">
-            <i class="fas fa-shopping-basket"></i>
-            <h3>Berbagi Paket Sembako (BPS)</h3>
-            <p>
-              Penyaluran sembako untuk keluarga dhuafa agar dapat beribadah
-              dengan tenang.
-            </p>
-          </div>
-          <div class="program-card" data-aos="fade-up" data-aos-delay="400">
-            <i class="fas fa-hand-holding-usd"></i>
-            <h3>Bantuan Tunai Ramadhan (BTR)</h3>
-            <p>
-              Bantuan tunai langsung untuk memenuhi kebutuhan mendesak keluarga
-              miskin saat Ramadhan.
-            </p>
-          </div>
-          <div class="program-card" data-aos="fade-up" data-aos-delay="500">
-            <i class="fas fa-seedling"></i>
-            <h3>Zakat Fitrah</h3>
-            <p>
-              Salurkan Zakat Fitrah Anda tepat waktu melalui HSI Berbagi kepada
-              yang berhak.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+        const terkumpul = parseFloat(progressContainer.getAttribute('data-terkumpul'));
+        const target = parseFloat(progressContainer.getAttribute('data-target'));
+        const percentage = Math.min(100, (terkumpul / target) * 100);
 
-    <section id="keutamaan" class="keutamaan-section section-padding">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-down">
-          Bulan Ramadhan adalah Waktu Investasi Terbaik untuk Akhirat
-        </h2>
-        <div class="keutamaan-content">
-          <blockquote class="quote" data-aos="zoom-in">
-            "Dari Anas, dikatakan: 'Wahai Rasulullah, sedekah apakah yang paling
-            utama?' Beliau menjawab: 'Sedekah di bulan Ramadhan.'"
-            <p style="font-size: 0.7em; font-style: normal; margin-top: 10px">
-              (HR. Tirmidzi no. 663. Imam Tirmidzi berkata: "Hadis ini Hasan
-              Gharib." Sebagian ulama menguatkannya hingga mencapai derajat
-              shahih lighairihi).
-            </p>
-          </blockquote>
-          <blockquote class="quote" data-aos="zoom-in" data-aos-delay="200">
-            "Barangsiapa memberi makan orang yang berpuasa, maka baginya pahala
-            seperti orang yang berpuasa itu, tanpa mengurangi sedikit pun dari
-            pahala orang yang berpuasa tersebut."
-            <p style="font-size: 0.7em; font-style: normal; margin-top: 10px">
-              (HR. Tirmidzi no. 807 dan Ibnu Majah no. 1746. Dinilai shahih oleh
-              Al-Albani)
-            </p>
-          </blockquote>
-        </div>
-      </div>
-    </section>
+        const fillElement = document.getElementById('progress-fill');
+        const terkumpulLabel = document.getElementById('terkumpul-label');
+        const targetLabel = document.getElementById('target-label');
+        const persenLabel = document.getElementById('persen-label');
 
-    <section id="donasi" class="donasi-section section-padding bg-light">
-      <div class="container text-center">
-        <h2 class="section-title" data-aos="fade-down">
-          Jadikan Ramadhan Terbaikmu Semakin Nyata dengan Berbagi Kebaikan di
-          Bulan Mulia
-        </h2>
-        <p class="text-center" data-aos="fade-up">
-          Mari capai target kebaikan bersama. Setiap kontribusi sangat berarti!
-        </p>
+        if (!fillElement) return;
 
-        <div
-          class="progress-container"
-          data-aos="zoom-in"
-          data-aos-delay="300"
-          data-terkumpul="75000000"
-          data-target="100000000"
-        >
-          <div class="progress-bar-label">
-            <span class="label-text" id="terkumpul-label"
-              >Terkumpul: <strong>Rp 75.000.000</strong></span
-            >
-            <span class="label-percentage" id="persen-label">75%</span>
-          </div>
-          <div class="progress-bar-base">
-            <div
-              class="progress-bar-fill"
-              id="progress-fill"
-              style="width: 0%"
-            ></div>
-          </div>
-          <div class="progress-target">
-            Target: <strong id="target-label">Rp 100.000.000</strong>
-          </div>
-        </div>
-        <div class="btn-progress">
-          <a
-            href="#"
-            class="btn-primary btn-large"
-            data-aos="zoom-in"
-            data-aos-delay="600"
-            >YUK BERBAGI</a
-          >
-        </div>
-      </div>
-    </section>
+        if (terkumpulLabel) {
+            terkumpulLabel.innerHTML = `Terkumpul: <strong>${formatRupiah(terkumpul)}</strong>`;
+        }
+        if (targetLabel) {
+            targetLabel.innerHTML = `${formatRupiah(target)}`;
+        }
+        if (persenLabel) {
+            persenLabel.textContent = `${Math.round(percentage)}%`;
+        }
 
-    <section id="galeri" class="galeri-section section-padding bg-light">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-down">
-          Dokumentasi Kebaikan Ramadhan (Galeri Foto)
-        </h2>
-        <p class="description text-center" data-aos="fade-up">
-          Ramadhan tahun lalu diwarnai dengan senyum ceria penerima manfaat di
-          berbagai daerah.
-        </p>
+        const observerProgress = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    fillElement.style.width = percentage + '%'; 
+                    observerProgress.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 }); 
 
-        <div class="carousel-wrapper" data-aos="fade-up" data-aos-delay="200">
-          <div class="carousel-track" id="photoCarouselTrack">
-            <div class="carousel-slide">
-              <img src="image/doc-7.jpg" alt="Penyaluran Paket Ifthar (BIRR)" />
-              <div class="slide-caption">Penyaluran Paket Ifthar (BIRR)</div>
-            </div>
-            <div class="carousel-slide">
-              <img src="image/doc-6.jpg" alt="Pembagian Paket Sembako (BPS)" />
-              <div class="slide-caption">Pembagian Paket Sembako (BPS)</div>
-            </div>
-            <div class="carousel-slide">
-              <img src="image/doc-2.jpg" alt="Bantuan Tunai Ramadhan (BTR)" />
-              <div class="slide-caption">Bantuan Tunai Ramadhan (BTR)</div>
-            </div>
-            <div class="carousel-slide">
-              <img src="image/doc-1.jpg" alt="Penyaluran Zakat Fitrah" />
-              <div class="slide-caption">Penyaluran Zakat Fitrah</div>
-            </div>
-            <div class="carousel-slide">
-              <img src="image/doc-3.jpg" alt="Ifthor Bersama Mualaf" />
-              <div class="slide-caption">Ifthor Bersama Mualaf</div>
-            </div>
-            <!-- <div class="carousel-slide">
-                <img src="image/doc-7.jpg" alt="Penyaluran Fidyah Makanan" />
-                <div class="slide-caption">Penyaluran Fidyah Makanan</div>
-              </div> -->
-            <div class="carousel-slide">
-              <img src="image/doc-4.jpg" alt="Kegiatan I'tikaf di Masjid" />
-              <div class="slide-caption">Kegiatan I'tikaf di Masjid</div>
-            </div>
-            <div class="carousel-slide">
-              <img src="image/doc-5.jpg" alt="Penyaluran di Pelosok Desa" />
-              <div class="slide-caption">Penyaluran di Pelosok Desa</div>
-            </div>
-          </div>
+        observerProgress.observe(progressContainer);
+    }
 
-          <!-- <button
-              class="carousel-control prev-control"
-              id="prevPhotoBtn"
-              aria-label="Gambar Sebelumnya"
-            >
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button
-              class="carousel-control next-control"
-              id="nextPhotoBtn"
-              aria-label="Gambar Berikutnya"
-            >
-              <i class="fas fa-chevron-right"></i>
-            </button> -->
-        </div>
+    updateProgressBar();
 
-        <h2 class="section-title" data-aos="fade-down" style="margin-top: 50px">
-          Pencapaian Kebaikan Ramadhan Tahun Lalu
-        </h2>
-        <div class="pencapaian-tahunan" data-aos="fade-up">
-          <div class="pencapaian-item">
-            <i class="fas fa-hand-holding-heart" style="color: #d67d3e"></i>
-            <p class="value">Rp 1.5 Miliar</p>
-            <p class="label">Total Nominal Donasi</p>
-          </div>
-          <div class="pencapaian-item">
-            <i class="fas fa-users" style="color: #002b47"></i>
-            <p class="value">25.000+</p>
-            <p class="label">Penerima Manfaat</p>
-          </div>
-          <div class="pencapaian-item">
-            <i class="fas fa-map-marked-alt" style="color: #d67d3e"></i>
-            <p class="value">150+</p>
-            <p class="label">Jumlah Wilayah Penyaluran</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    
+    // =========================================================
+    // ✅ PERBAIKAN: 4. CAROUSEL FOTO (AUTO-SLIDE TANPA TOMBOL)
+    // =========================================================
+    const photoWrapper = document.querySelector('.carousel-wrapper'); 
+    const photoTrack = document.getElementById('photoCarouselTrack');
+    // photoNextButton dan photoPrevButton DIHAPUS
 
-    <div id="galleryModal" class="modal">
-      <span class="close-btn">&times;</span>
-      <div class="modal-content"></div>
-    </div>
+    const SLIDE_INTERVAL = 5000;
+    let slideTimer;
 
-    <button id="backToTopBtn" title="Kembali ke Atas" class="back-to-top">
-      <i class="fas fa-chevron-up"></i>
-    </button>
+    // Hanya perlu memeriksa keberadaan wrapper dan track
+    if (photoTrack && photoWrapper) {
+        const slides = Array.from(photoTrack.children);
+        const totalSlides = slides.length;
+        let photoIndex = 0;
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-contact">
-            <h4>Kontak Kami</h4>
-            <p>
-              <i class="fas fa-map-marker-alt"></i> Kantor Pusat HSI Berbagi
-            </p>
-            <p><i class="fas fa-phone"></i> +62 812-3456-7890</p>
-            <p><i class="fas fa-envelope"></i> info@hsiberbagi.com</p>
-          </div>
+        const getVisibleSlideCount = () => {
+            const width = window.innerWidth;
+            if (width <= 600) {
+                return 1;
+            } else if (width <= 992) {
+                return 2;
+            } else {
+                return 3;
+            }
+        };
 
-          <div class="footer-links">
-            <h4>Tautan Cepat</h4>
-            <ul>
-              <li><a href="#program">Program</a></li>
-              <li><a href="#donasi">Cara Donasi</a></li>
-              <li><a href="#galeri">Dokumentasi</a></li>
-            </ul>
-          </div>
+        const updatePhotoCarousel = () => {
+            const visibleCount = getVisibleSlideCount();
+            const slideWidthPercentage = 100 / visibleCount;
+            const maxIndex = totalSlides - visibleCount; 
+            const finalMaxIndex = Math.max(0, maxIndex);
 
-          <div class="footer-social">
-            <h4>Ikuti Kami</h4>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>
-          &copy; 2025 HSI Berbagi. Dikelola oleh Yayasan Halaqah Silsilah
-          Ilmiyyah AbdullahRoy.
-        </p>
-      </div>
-    </footer>
+            // Perkuat logika looping
+            if (photoIndex > finalMaxIndex) {
+                photoIndex = 0; 
+            } else if (photoIndex < 0) {
+                photoIndex = finalMaxIndex; 
+            }
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
-  </body>
-</html>
+            const offset = -photoIndex * slideWidthPercentage;
+            photoTrack.style.transform = `translateX(${offset}%)`;
+        };
+        
+        const stopAutoSlide = () => {
+            clearInterval(slideTimer);
+        };
+        
+        const startAutoSlide = () => {
+            stopAutoSlide(); 
+            
+            slideTimer = setInterval(() => {
+                const maxIndex = totalSlides - getVisibleSlideCount();
+                const finalMaxIndex = Math.max(0, maxIndex);
+                
+                // Geser ke index berikutnya
+                if (photoIndex < finalMaxIndex) {
+                    photoIndex++;
+                } else {
+                    photoIndex = 0; // Looping ke awal
+                }
+                updatePhotoCarousel();
+            }, SLIDE_INTERVAL);
+        };
+        
+        // --- Kontrol Hover (Jeda Otomatis Saat Dilihat) ---
+        // Carousel akan berhenti jika kursor di atasnya
+        photoWrapper.addEventListener('mouseover', stopAutoSlide);
+        photoWrapper.addEventListener('mouseout', startAutoSlide);
+
+        // Panggil saat halaman dimuat dan ketika ukuran jendela berubah
+        window.addEventListener('resize', () => {
+            stopAutoSlide();
+            photoIndex = 0; // Reset index saat resize
+            updatePhotoCarousel(); 
+            startAutoSlide();
+        });
+        
+        // Inisialisasi awal
+        updatePhotoCarousel(); 
+        startAutoSlide(); // 🚀 Memulai auto-slide secara otomatis
+    }
+
+
+    // --- 6. TOMBOL KEMBALI KE ATAS (BACK TO TOP) ---
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    const scrollThreshold = 300; 
+
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > scrollThreshold) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+}); // END DOMContentLoaded
+
+// =========================================================
+// --- 7. MODAL GALERI (GLOBAL FUNCTION) ---
+// =========================================================
+
+const modal = document.getElementById("galleryModal");
+const closeButton = document.getElementsByClassName("close-btn")[0];
+const modalContent = modal ? modal.querySelector('.modal-content') : null;
+
+if (modal && closeButton && modalContent) {
+    
+    function closeModal() {
+        modal.classList.remove("active"); 
+        
+        setTimeout(() => {
+            modal.style.display = "none";
+            modalContent.innerHTML = ''; 
+        }, 300); 
+    }
+
+    window.openModal = function(src, type) {
+        modalContent.innerHTML = ''; 
+        
+        if (type === 'image') {
+            modalContent.innerHTML = `<img src="${src}" alt="Dokumentasi HSI Berbagi">`;
+        } else if (type === 'video') {
+             modalContent.innerHTML = `
+                 <iframe 
+                     src="${src}?autoplay=1&rel=0" 
+                     frameborder="0" 
+                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                     allowfullscreen
+                 ></iframe>
+             `;
+        }
+        
+        modal.style.display = "flex"; 
+        
+        setTimeout(() => {
+             modal.classList.add("active");
+        }, 10);
+        
+    }
+
+    closeButton.onclick = closeModal;
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+}
