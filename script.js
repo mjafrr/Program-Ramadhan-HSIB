@@ -129,72 +129,90 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================
-    // --- 4. CAROUSEL FOTO (SECTION GALERI) ---
-    // =========================================================
-    const photoTrack = document.getElementById('photoCarouselTrack');
-    const photoNextButton = document.getElementById('nextPhotoBtn');
-    const photoPrevButton = document.getElementById('prevPhotoBtn');
+    // Fungsi untuk menggeser carousel foto
+    const updatePhotoCarousel = () => {
+        const visibleCount = getVisibleSlideCount();
+        const slideWidthPercentage = 100 / visibleCount;
+        const maxIndex = slides.length - visibleCount;
+
+        // Membatasi index agar tidak melebihi batas terakhir
+        if (photoIndex > maxIndex) {
+            // Jika melebihi batas, kembali ke slide pertama (Looping)
+            photoIndex = 0; 
+        } else if (photoIndex < 0) {
+            // Jika mundur, ke slide terakhir
+            photoIndex = maxIndex;
+        }
+
+        const offset = -photoIndex * slideWidthPercentage;
+        photoTrack.style.transform = `translateX(${offset}%)`;
+
+        // Update status tombol (Nonaktifkan jika tidak ingin looping)
+        // photoPrevButton.disabled = photoIndex === 0;
+        // photoNextButton.disabled = photoIndex >= maxIndex;
+    };
     
-    if (photoTrack && photoNextButton && photoPrevButton) {
-        const slides = Array.from(photoTrack.children);
-        let photoIndex = 0;
-
-        // Fungsi untuk mendapatkan berapa banyak slide yang terlihat (sesuai CSS media query)
-        const getVisibleSlideCount = () => {
-            const width = window.innerWidth;
-            if (width <= 600) {
-                return 1; // Mobile: 1
-            } else if (width <= 992) {
-                return 2; // Tablet: 2
-            } else {
-                return 3; // Desktop: 3
-            }
-        };
-
-        // Fungsi untuk menggeser carousel foto
-        const updatePhotoCarousel = () => {
-            const visibleCount = getVisibleSlideCount();
-            const slideWidthPercentage = 100 / visibleCount;
-            const maxIndex = slides.length - visibleCount;
-
-            // Membatasi index agar tidak melebihi batas terakhir
-            if (photoIndex > maxIndex) photoIndex = maxIndex;
-            if (photoIndex < 0) photoIndex = 0;
-
-            const offset = -photoIndex * slideWidthPercentage;
-            photoTrack.style.transform = `translateX(${offset}%)`;
-
-            // Update status tombol
-            photoPrevButton.disabled = photoIndex === 0;
-            photoNextButton.disabled = photoIndex >= maxIndex;
-        };
-
-        // Handler Tombol Next
-        photoNextButton.addEventListener('click', () => {
+    // Fungsi untuk memulai auto-slide
+    const startAutoSlide = () => {
+        // Hentikan timer yang sudah ada (jika ada) untuk menghindari duplikasi
+        stopAutoSlide(); 
+        
+        slideTimer = setInterval(() => {
             const maxIndex = slides.length - getVisibleSlideCount();
-            if (photoIndex < maxIndex) {
+
+            // Jika sudah di slide terakhir, kembali ke slide 0, jika tidak, maju 1
+            if (photoIndex >= maxIndex) {
+                photoIndex = 0; 
+            } else {
                 photoIndex++;
             }
             updatePhotoCarousel();
-        });
+        }, SLIDE_INTERVAL);
+    };
 
-        // Handler Tombol Previous
-        photoPrevButton.addEventListener('click', () => {
-            if (photoIndex > 0) {
-                photoIndex--;
-            }
-            updatePhotoCarousel();
-        });
+    // Fungsi untuk menghentikan auto-slide
+    const stopAutoSlide = () => {
+        clearInterval(slideTimer);
+    };
 
-        // Panggil saat halaman dimuat dan ketika ukuran jendela berubah
-        window.addEventListener('resize', () => {
-            photoIndex = 0; // Reset index agar posisi tetap konsisten saat resize
-            updatePhotoCarousel(); 
-        });
-        
-        // Inisialisasi awal
+    // Handler Tombol Next (Manual)
+    photoNextButton.addEventListener('click', () => {
+        const maxIndex = slides.length - getVisibleSlideCount();
+        if (photoIndex < maxIndex) {
+            photoIndex++;
+        } else {
+            photoIndex = 0; // Looping saat manual klik
+        }
+        updatePhotoCarousel();
+        startAutoSlide(); // Reset timer setiap kali navigasi manual
+    });
+
+    // Handler Tombol Previous (Manual)
+    photoPrevButton.addEventListener('click', () => {
+        if (photoIndex > 0) {
+            photoIndex--;
+        } else {
+            photoIndex = slides.length - getVisibleSlideCount(); // Looping saat manual klik
+        }
+        updatePhotoCarousel();
+        startAutoSlide(); // Reset timer setiap kali navigasi manual
+    });
+    
+    // --- Kontrol Hover (Jeda Otomatis Saat Dilihat) ---
+    photoWrapper.addEventListener('mouseover', stopAutoSlide);
+    photoWrapper.addEventListener('mouseout', startAutoSlide);
+
+    // Panggil saat halaman dimuat dan ketika ukuran jendela berubah
+    window.addEventListener('resize', () => {
+        photoIndex = 0; // Reset index agar posisi tetap konsisten saat resize
         updatePhotoCarousel(); 
-    }
+        startAutoSlide(); // Mulai kembali auto-slide setelah resize
+    });
+    
+    // Inisialisasi awal
+    updatePhotoCarousel(); 
+    startAutoSlide(); // Mulai auto-slide pertama kali
+}
 
 
     // --- 5. DROP-DOWN FAQ (ACCORDION) ---
@@ -290,3 +308,4 @@ if (modal && closeButton && modalContent) {
         }
     }
 }
+
