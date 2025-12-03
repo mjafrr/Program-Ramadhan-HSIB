@@ -183,7 +183,7 @@ a:hover {
 /* --- 2. HERO SECTION --- */
 .hero-section {
   background: linear-gradient(rgba(0, 43, 71, 0.7), rgba(0, 43, 71, 0.7)),
-    url("img/ramadhan-bg.jpg") no-repeat center center/cover;
+    url("/ramadhan-bg1.png") no-repeat center center/cover;
   min-height: 90vh;
   height: auto;
   display: flex;
@@ -417,68 +417,6 @@ a:hover {
 }
 
 /* --- 6. PENERIMA MANFAAT (TESTIMONIAL CAROUSEL) --- */
-.testimonial-carousel {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 15px;
-  height: 200px; /* FIX: Ketinggian sedikit ditambah */
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 30px;
-  background-color: #ffffff;
-}
-
-.testimonial-item {
-  padding: 30px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-}
-
-.testimonial-item.active {
-  opacity: 1;
-  position: relative;
-  z-index: 10;
-}
-
-.testimonial-item p {
-  font-size: 1.1em;
-  font-style: italic;
-  margin-bottom: 15px;
-  color: #555;
-  line-height: 1.5; /* FIX: Jarak baris ditambah */
-}
-
-.testimonial-item cite {
-  display: block;
-  font-weight: 600;
-  color: #d67d3e;
-  font-style: normal;
-}
-
-.carousel-nav {
-  text-align: center;
-}
-
-.carousel-nav button {
-  background: #002b47;
-  color: white;
-  border: 1px solid #002b47; /* FIX: Tambahkan border */
-  padding: 10px 15px;
-  border-radius: 50%;
-  margin: 0 10px;
-  cursor: pointer;
-  transition: all 0.3s; /* FIX: Transisi all */
-}
-
-.carousel-nav button:hover {
-  background-color: #d67d3e;
-  border-color: #d67d3e;
-  transform: scale(1.05); /* FIX: Skala hover lebih halus */
-}
 
 /* --- 7. GALERI SECTION (CAROUSEL FOTO) --- */
 .carousel-wrapper {
