@@ -91,44 +91,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateProgressBar();
 
-    // --- 3. CAROUSEL TESTIMONI ---
-    const carousel = document.getElementById('testimonial-carousel');
-    const prevBtn = document.querySelector('.carousel-nav .prev-btn');
-    const nextBtn = document.querySelector('.carousel-nav .next-btn');
-
-    if (carousel && prevBtn && nextBtn) {
-        const items = carousel.querySelectorAll('.testimonial-item');
-        const totalItems = items.length;
-        let currentIndex = 0;
-
-        function showItem(index) {
-            if (items.length === 0) return;
-
-            currentIndex = (index % totalItems + totalItems) % totalItems;
-
-            items.forEach((item) => {
-                // Hapus kelas aktif dan atur properti untuk transisi keluar
-                item.classList.remove('active');
-                item.style.opacity = 0; 
-                item.style.position = 'absolute'; 
-            });
-
-            // Tampilkan item aktif
-            items[currentIndex].classList.add('active');
-            items[currentIndex].style.opacity = 1; 
-            items[currentIndex].style.position = 'relative'; 
-        }
-
-        prevBtn.addEventListener('click', () => showItem(currentIndex - 1));
-        nextBtn.addEventListener('click', () => showItem(currentIndex + 1));
-
-        // Auto-play
-        setInterval(() => showItem(currentIndex + 1), 7000); 
-
-        showItem(0); // Inisialisasi: Tampilkan item pertama
-    }
+    
 
     // =========================================================
+    // --- 4. CAROUSEL FOTO (SECTION GALERI) ---
+// =========================================================
+const photoWrapper = document.querySelector('.carousel-wrapper'); // Ambil wrapper-nya untuk event hover
+const photoTrack = document.getElementById('photoCarouselTrack');
+const photoNextButton = document.getElementById('nextPhotoBtn');
+const photoPrevButton = document.getElementById('prevPhotoBtn');
+
+// Waktu jeda (interval) dalam milidetik (misalnya, 5 detik)
+const SLIDE_INTERVAL = 5000;
+let slideTimer;
+
+if (photoTrack && photoNextButton && photoPrevButton && photoWrapper) {
+    const slides = Array.from(photoTrack.children);
+    let photoIndex = 0;
+
+    // Fungsi untuk mendapatkan berapa banyak slide yang terlihat (sesuai CSS media query)
+    const getVisibleSlideCount = () => {
+        const width = window.innerWidth;
+        if (width <= 600) {
+            return 1; // Mobile: 1
+        } else if (width <= 992) {
+            return 2; // Tablet: 2
+        } else {
+            return 3; // Desktop: 3
+        }
+    };
+
     // Fungsi untuk menggeser carousel foto
     const updatePhotoCarousel = () => {
         const visibleCount = getVisibleSlideCount();
@@ -308,4 +300,3 @@ if (modal && closeButton && modalContent) {
         }
     }
 }
-
